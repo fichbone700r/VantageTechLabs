@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Vantage Tech Labs - Custom Software Solutions and IoT Hardware for Restaurants, Bakeries, and Retail Businesses">
+    <meta name="keywords"
+        content="custom software, IoT hardware, ESP32, restaurant management, bakery software, retail solutions">
+    <title>Vantage Tech Labs - Custom Software & IoT Solutions</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home">
+                <img src="logo-horizontal.png" alt="Vantage Tech Labs Logo" class="logo">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#services" class="nav-link" data-translate="nav_services">Services</a></li>
+                <li><a href="#industries" class="nav-link" data-translate="nav_industries">Industries</a></li>
+                <li><a href="#tech" class="nav-link" data-translate="nav_tech">Technology</a></li>
+                <li><a href="#quote" class="nav-link" data-translate="nav_quote">Get Quote</a></li>
+                <li><button class="lang-toggle" id="langToggle">ES</button></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-translate="hero_title">Transforming Businesses with Technology</h1>
+                <p data-translate="hero_subtitle">Custom software solutions and IoT hardware designed to boost
+                    productivity for restaurants, bakeries, and retail businesses worldwide.</p>
+                <div class="hero-buttons">
+                    <a href="#quote" class="btn btn-primary" data-translate="hero_cta_primary">Request a Quote</a>
+                    <a href="#services" class="btn btn-outline" data-translate="hero_cta_secondary">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="services_title">Our Services</h2>
+                <p data-translate="services_subtitle">Comprehensive technology solutions tailored to your business needs
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Custom Software Card -->
+                <div class="glass-card service-card fade-in">
+                    <div class="service-icon">💻</div>
+                    <h3 data-translate="service_software_title">Custom Software</h3>
+                    <p data-translate="service_software_desc">Powerful management systems designed for your industry</p>
+                    <ul>
+                        <li data-translate="service_software_1">Inventory & Stock Control</li>
+                        <li data-translate="service_software_2">Sales Management</li>
+                        <li data-translate="service_software_3">Financial Administration</li>
+                        <li data-translate="service_software_4">Real-time Reporting</li>
+                        <li data-translate="service_software_5">Multi-user Access Control</li>
+                    </ul>
+                </div>
+
+                <!-- IoT Hardware Card -->
+                <div class="glass-card service-card fade-in">
+                    <div class="service-icon">🔧</div>
+                    <h3 data-translate="service_iot_title">IoT Hardware</h3>
+                    <p data-translate="service_iot_desc">Smart devices for monitoring and remote control</p>
+                    <ul>
+                        <li data-translate="service_iot_1">Custom IoT Devices</li>
+                        <li data-translate="service_iot_2">Temperature & Humidity Monitoring</li>
+                        <li data-translate="service_iot_3">Remote Web Control</li>
+                        <li data-translate="service_iot_4">Real-time Alerts</li>
+                        <li data-translate="service_iot_5">Proprietary Hardware Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries" id="industries">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="industries_title">Industries We Serve</h2>
+                <p data-translate="industries_subtitle">Specialized solutions for diverse business sectors</p>
+            </div>
+
+            <div class="industries-grid">
+                <div class="glass-card industry-card fade-in">
+                    <div class="industry-icon">🥖</div>
+                    <h3 data-translate="industry_bakery">Bakeries</h3>
+                    <p data-translate="industry_bakery_desc">Production tracking, inventory management, and sales
+                        optimization</p>
+                </div>
+
+                <div class="glass-card industry-card fade-in">
+                    <div class="industry-icon">🍽️</div>
+                    <h3 data-translate="industry_restaurant">Restaurants</h3>
+                    <p data-translate="industry_restaurant_desc">Order management, kitchen control, and customer service
+                        systems</p>
+                </div>
+
+                <div class="glass-card industry-card fade-in">
+                    <div class="industry-icon">🍕</div>
+                    <h3 data-translate="industry_pizzeria">Pizzerias</h3>
+                    <p data-translate="industry_pizzeria_desc">Delivery tracking, recipe management, and POS integration
+                    </p>
+                </div>
+
+                <div class="glass-card industry-card fade-in">
+                    <div class="industry-icon">🍺</div>
+                    <h3 data-translate="industry_pub">Pubs & Bars</h3>
+                    <p data-translate="industry_pub_desc">Inventory control, tab management, and supplier tracking</p>
+                </div>
+
+                <div class="glass-card industry-card fade-in">
+                    <div class="industry-icon">🏪</div>
+                    <h3 data-translate="industry_retail">Retail</h3>
+                    <p data-translate="industry_retail_desc">Point of sale, stock management, and customer analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack" id="tech">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="tech_title">Technology Stack</h2>
+                <p data-translate="tech_subtitle">Cutting-edge technologies powering our solutions</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-badge fade-in" data-translate="tech_iot">IoT Devices</div>
+                <div class="tech-badge fade-in" data-translate="tech_sensors">Smart Sensors</div>
+                <div class="tech-badge fade-in" data-translate="tech_web">Web Control</div>
+                <div class="tech-badge fade-in" data-translate="tech_cloud">Cloud Integration</div>
+                <div class="tech-badge fade-in" data-translate="tech_realtime">Real-time Monitoring</div>
+                <div class="tech-badge fade-in" data-translate="tech_mobile">Mobile Responsive</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="quote-form" id="quote">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="quote_title">Request a Quote</h2>
+                <p data-translate="quote_subtitle">Tell us about your project and we'll get back to you within 24 hours
+                </p>
+            </div>
+
+            <form class="form-container" id="quoteForm">
+                <div class="form-group">
+                    <label for="name" data-translate="form_name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" data-translate="form_email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company" data-translate="form_company">Company Name</label>
+                    <input type="text" id="company" name="company">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" data-translate="form_phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label data-translate="form_services">Services Needed *</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="services" value="software" id="serviceSoftware">
+                            <span data-translate="form_service_software">Custom Software</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="services" value="hardware" id="serviceHardware">
+                            <span data-translate="form_service_hardware">IoT Hardware</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry" data-translate="form_industry">Industry *</label>
+                    <select id="industry" name="industry" required>
+                        <option value="" data-translate="form_select">Select an option</option>
+                        <option value="bakery" data-translate="form_industry_bakery">Bakery</option>
+                        <option value="restaurant" data-translate="form_industry_restaurant">Restaurant</option>
+                        <option value="pizzeria" data-translate="form_industry_pizzeria">Pizzeria</option>
+                        <option value="pub" data-translate="form_industry_pub">Pub/Bar</option>
+                        <option value="retail" data-translate="form_industry_retail">Retail</option>
+                        <option value="other" data-translate="form_industry_other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message" data-translate="form_message">Project Details *</label>
+                    <textarea id="message" name="message" required placeholder=""></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-submit" data-translate="form_submit">Send
+                    Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Vantage Tech Labs</h3>
+                    <p data-translate="footer_tagline">Innovative technology solutions for businesses worldwide</p>
+                    <p data-translate="footer_locations">🌎 Operating in USA & Chile</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-translate="footer_services">Services</h3>
+                    <a href="#services" data-translate="footer_software">Custom Software Development</a>
+                    <a href="#services" data-translate="footer_iot">IoT Hardware Design</a>
+                    <a href="#services" data-translate="footer_consulting">Technology Consulting</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-translate="footer_contact">Contact</h3>
+                    <p>info@vantagetechlabs.com</p>
+                    <p data-translate="footer_hours">Mon - Fri: 9AM - 6PM</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+                        <a href="#" class="social-link" aria-label="GitHub">💻</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vantage Tech Labs. <span data-translate="footer_rights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
