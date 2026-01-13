@@ -168,7 +168,7 @@ p {
 }
 
 .logo {
-  height: 120px;
+  height: 200px;
   transition: transform var(--transition-normal);
 }
 
