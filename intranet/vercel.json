@@ -1,0 +1,7 @@
+{
+    "buildCommand": "cd intranet && npm install && npm run build",
+    "outputDirectory": "intranet/dist",
+    "installCommand": "cd intranet && npm install",
+    "framework": "vite",
+    "devCommand": "cd intranet && npm run dev"
+}
