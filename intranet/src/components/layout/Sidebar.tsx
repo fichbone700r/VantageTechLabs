@@ -23,19 +23,11 @@ export default function Sidebar() {
             {/* Logo */}
             <div className="flex h-24 items-center px-8">
                 <div className="flex items-center gap-3 group cursor-pointer">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform duration-300">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M6 3L2 9l10 12 10-12-4-6" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span className="block text-xl text-display leading-none bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">
-                            VANTAGE.
-                        </span>
-                        <span className="text-[9px] font-black tracking-[0.2em] text-slate-400 uppercase block mt-1">
-                            TECH LABS
-                        </span>
-                    </div>
+                    <img
+                        src="/vantage-logo-horizontal.png"
+                        alt="Vantage Tech Labs"
+                        className="h-12 w-auto group-hover:scale-105 transition-transform duration-300"
+                    />
                 </div>
             </div>
 
