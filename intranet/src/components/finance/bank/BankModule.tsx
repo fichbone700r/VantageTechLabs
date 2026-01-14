@@ -1,25 +1,13 @@
 import { useState } from 'react'
 import { Plus, Building2, ArrowUpRight, ArrowDownRight, Search, FileText } from 'lucide-react'
+import { useFinance } from '../../../context/FinanceContext'
 import type { BankAccount, Transaction } from '../../../types/finance'
 
-// Mock Data (Temporary)
-const INITIAL_ACCOUNTS: BankAccount[] = [
-    { id: '1', name: 'Cuenta Corriente Principal', balance: 12450000, accountNumber: '987654321', bankName: 'Banco de Chile' },
-    { id: '2', name: 'Cuenta Operacional', balance: 4200500, accountNumber: '123456789', bankName: 'Santander' },
-]
-
-const INITIAL_TRANSACTIONS: Transaction[] = [
-    { id: 't1', date: '2024-10-24', description: 'Pago Cliente Factura #402', documentType: 'Factura', documentNumber: '402', amount: 3500000, type: 'income', accountId: '1', balanceAfter: 12450000 },
-    { id: 't2', date: '2024-10-23', description: 'Compra Insumos Oficina', documentType: 'Factura', documentNumber: '9982', amount: 156000, type: 'expense', accountId: '1', balanceAfter: 8950000 },
-    { id: 't3', date: '2024-10-22', description: 'Pago Nómina Octubre (Parcial)', documentType: 'Transferencia', documentNumber: 'T-8822', amount: 4500000, type: 'expense', accountId: '1', balanceAfter: 9106000 },
-];
-
 export default function BankModule() {
-    const [accounts, setAccounts] = useState<BankAccount[]>(INITIAL_ACCOUNTS)
-    const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS)
-    const [selectedAccount, setSelectedAccount] = useState<string>(INITIAL_ACCOUNTS[0].id)
+    const { accounts, transactions, addAccount, addTransaction } = useFinance()
+    const [selectedAccount, setSelectedAccount] = useState<string>(accounts[0]?.id || '')
     const [showAddTransaction, setShowAddTransaction] = useState(false)
-    const [showAddAccount, setShowAddAccount] = useState(false) // New State for Account Modal
+    const [showAddAccount, setShowAddAccount] = useState(false)
 
     // Derived state
     const currentAccount = accounts.find(acc => acc.id === selectedAccount) || accounts[0]
@@ -39,7 +27,7 @@ export default function BankModule() {
             accountNumber: formData.get('accountNumber') as string,
             balance: Number(formData.get('initialBalance')),
         }
-        setAccounts([...accounts, newAccount])
+        addAccount(newAccount)
         setSelectedAccount(newAccount.id) // Switch to new account
         setShowAddAccount(false)
         e.currentTarget.reset()
@@ -50,6 +38,8 @@ export default function BankModule() {
         const formData = new FormData(e.currentTarget)
         const type = formData.get('type') as 'income' | 'expense'
         const amount = Number(formData.get('amount'))
+
+        if (!currentAccount) return
 
         const newTransaction: Transaction = {
             id: Date.now().toString(),
@@ -65,17 +55,7 @@ export default function BankModule() {
                 : currentAccount.balance - amount
         }
 
-        // Update Transactions
-        setTransactions([newTransaction, ...transactions])
-
-        // Update Account Balance
-        const updatedAccounts = accounts.map(acc => {
-            if (acc.id === selectedAccount) {
-                return { ...acc, balance: newTransaction.balanceAfter }
-            }
-            return acc
-        })
-        setAccounts(updatedAccounts)
+        addTransaction(newTransaction)
         setShowAddTransaction(false)
         e.currentTarget.reset()
     }

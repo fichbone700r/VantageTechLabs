@@ -1,41 +1,16 @@
 import { useState } from 'react'
-import { Plus, Search, Calendar, FileText, CheckCircle, AlertCircle, Clock } from 'lucide-react'
+import { Plus, Search, Calendar, FileText, CheckCircle, AlertCircle, Clock, Wallet } from 'lucide-react'
+import { useFinance } from '../../../context/FinanceContext'
 import type { PurchaseInvoice } from '../../../types/finance'
 
-// Mock Data
-const INITIAL_INVOICES: PurchaseInvoice[] = [
-    {
-        id: '1',
-        providerName: 'Proveedor Tecnológico SpA',
-        providerRUT: '76.123.456-8',
-        documentNumber: '1024',
-        issueDate: '2024-10-20',
-        dueDate: '2024-11-20',
-        netAmount: 1200000,
-        taxAmount: 228000,
-        totalAmount: 1428000,
-        status: 'pending',
-        description: 'Servidores Octubre'
-    },
-    {
-        id: '2',
-        providerName: 'Insumos Oficina Ltda',
-        providerRUT: '77.987.654-3',
-        documentNumber: '5501',
-        issueDate: '2024-10-15',
-        dueDate: '2024-10-15',
-        netAmount: 50000,
-        taxAmount: 9500,
-        totalAmount: 59500,
-        status: 'paid',
-        description: 'Papel y Tinta'
-    }
-]
-
 export default function PurchaseInvoicesModule() {
-    const [invoices, setInvoices] = useState<PurchaseInvoice[]>(INITIAL_INVOICES)
+    const { invoices, accounts, addInvoice, payInvoice } = useFinance()
     const [showAddModal, setShowAddModal] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
+
+    // Pay Modal State
+    const [invoiceToPay, setInvoiceToPay] = useState<PurchaseInvoice | null>(null)
+    const [selectedBankForPayment, setSelectedBankForPayment] = useState('')
 
     // Form logic state
     const [netAmount, setNetAmount] = useState<number | ''>('')
@@ -70,10 +45,19 @@ export default function PurchaseInvoicesModule() {
             status: 'pending' // Default status
         }
 
-        setInvoices([newInvoice, ...invoices])
+        addInvoice(newInvoice)
         setShowAddModal(false)
         setNetAmount('') // Reset internal state
         e.currentTarget.reset()
+    }
+
+    const handlePayInvoice = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (invoiceToPay && selectedBankForPayment) {
+            payInvoice(invoiceToPay.id, selectedBankForPayment)
+            setInvoiceToPay(null)
+            setSelectedBankForPayment('')
+        }
     }
 
     return (
@@ -119,6 +103,7 @@ export default function PurchaseInvoicesModule() {
                             <th className="px-6 py-4 font-bold text-right">Neto</th>
                             <th className="px-6 py-4 font-bold text-right">IVA (19%)</th>
                             <th className="px-6 py-4 font-bold text-right">Total</th>
+                            <th className="px-6 py-4 font-bold text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,11 +152,82 @@ export default function PurchaseInvoicesModule() {
                                 <td className="px-6 py-4 text-right font-black text-slate-800 text-base">
                                     {formatCurrency(inv.totalAmount)}
                                 </td>
+                                <td className="px-6 py-4 text-center">
+                                    {inv.status === 'pending' && (
+                                        <button
+                                            onClick={() => {
+                                                setInvoiceToPay(inv)
+                                                setSelectedBankForPayment(accounts[0]?.id || '')
+                                            }}
+                                            className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
+                                        >
+                                            Pagar
+                                        </button>
+                                    )}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            {/* Pay Invoice Modal */}
+            {invoiceToPay && (
+                <div className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-200">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-black text-slate-900">Pagar Factura</h3>
+                            <button onClick={() => setInvoiceToPay(null)} className="text-slate-400 hover:text-slate-600">✕</button>
+                        </div>
+
+                        <div className="bg-slate-50 p-4 rounded-xl mb-6">
+                            <p className="text-xs font-bold text-slate-500 uppercase">Estás pagando a</p>
+                            <p className="text-lg font-bold text-slate-800">{invoiceToPay.providerName}</p>
+                            <div className="flex justify-between mt-2 pt-2 border-t border-slate-200">
+                                <span className="text-sm font-medium text-slate-500">Total a Pagar</span>
+                                <span className="text-lg font-black text-indigo-600">{formatCurrency(invoiceToPay.totalAmount)}</span>
+                            </div>
+                        </div>
+
+                        <form onSubmit={handlePayInvoice} className="space-y-4">
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Seleccionar Cuenta de Origen</label>
+                                <div className="space-y-2">
+                                    {accounts.map(acc => (
+                                        <div
+                                            key={acc.id}
+                                            onClick={() => setSelectedBankForPayment(acc.id)}
+                                            className={`p-3 rounded-xl border flex justify-between items-center cursor-pointer transition-all ${selectedBankForPayment === acc.id
+                                                    ? 'bg-indigo-50 border-indigo-500 ring-1 ring-indigo-500'
+                                                    : 'bg-white border-slate-200 hover:border-slate-300'
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <div className={`p-2 rounded-lg ${selectedBankForPayment === acc.id ? 'bg-indigo-200 text-indigo-700' : 'bg-slate-100 text-slate-500'}`}>
+                                                    <Wallet className="w-4 h-4" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-bold text-slate-800">{acc.name}</p>
+                                                    <p className="text-xs text-slate-500">{acc.bankName}</p>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-xs font-bold text-slate-700">{formatCurrency(acc.balance)}</p>
+                                                <p className="text-[10px] text-slate-400">Disponible</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <button type="submit" className="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-200 mt-2 hover:bg-emerald-700 transition-colors flex justify-center items-center gap-2">
+                                <CheckCircle className="w-5 h-5" />
+                                Confirmar Pago
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             {/* Add Invoice Modal */}
             {showAddModal && (
