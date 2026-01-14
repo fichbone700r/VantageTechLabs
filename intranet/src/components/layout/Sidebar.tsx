@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import {
     LayoutDashboard,
     Wallet,
@@ -8,14 +8,15 @@ import {
 } from 'lucide-react'
 
 export default function Sidebar() {
-    const [active, setActive] = useState('Overview')
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const navigation = [
-        { name: 'Overview', icon: LayoutDashboard },
-        { name: 'Finanzas', icon: Wallet },
-        { name: 'Inventario', icon: Package },
-        { name: 'RRHH', icon: Users },
-        { name: 'Ajustes', icon: Settings },
+        { name: 'Overview', icon: LayoutDashboard, path: '/' },
+        { name: 'Finanzas', icon: Wallet, path: '/finanzas' },
+        { name: 'Inventario', icon: Package, path: '/inventario' },
+        { name: 'RRHH', icon: Users, path: '/rrhh' },
+        { name: 'Ajustes', icon: Settings, path: '/ajustes' },
     ]
 
     return (
@@ -34,11 +35,12 @@ export default function Sidebar() {
             {/* Navigation */}
             <nav className="flex-1 space-y-2 px-5 py-8">
                 {navigation.map((item) => {
-                    const isActive = active === item.name
+                    const isActive = location.pathname.startsWith(item.path) || (item.path === '/' && location.pathname === '/')
+
                     return (
                         <button
                             key={item.name}
-                            onClick={() => setActive(item.name)}
+                            onClick={() => navigate(item.path)}
                             className={`
                 w-full group flex items-center rounded-[20px] px-5 py-4 text-sm font-bold transition-all duration-300 ease-out
                 ${isActive
