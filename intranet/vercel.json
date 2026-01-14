@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/api/proxy/sre/(.*)",
+            "destination": "https://sre.cl/api/$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }

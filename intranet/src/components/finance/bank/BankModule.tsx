@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Plus, Building2, ArrowUpRight, ArrowDownRight, Search, FileText } from 'lucide-react'
 import { useFinance } from '../../../context/FinanceContext'
 import type { BankAccount, Transaction } from '../../../types/finance'
+import RutInput from '../../common/RutInput'
+import type { RutData } from '../../../services/rutService'
 
 export default function BankModule() {
     const { accounts, transactions, addAccount, addTransaction } = useFinance()
@@ -59,6 +61,17 @@ export default function BankModule() {
         setShowAddTransaction(false)
         e.currentTarget.reset()
     }
+
+    const handleRutDataFound = (data: RutData) => {
+        // Auto-fill form data when RUT is found
+        const form = document.querySelector('form[name="transactionForm"]') as HTMLFormElement;
+        if (form) {
+            const descriptionInput = form.elements.namedItem('description') as HTMLInputElement;
+            if (descriptionInput) {
+                descriptionInput.value = `Pago a ${data.name}`;
+            }
+        }
+    };
 
 
     return (
@@ -181,7 +194,7 @@ export default function BankModule() {
                             <h3 className="text-xl font-black text-slate-900">Nueva Transacción</h3>
                             <button onClick={() => setShowAddTransaction(false)} className="text-slate-400 hover:text-slate-600">✕</button>
                         </div>
-                        <form onSubmit={handleAddTransaction} className="space-y-4">
+                        <form name="transactionForm" onSubmit={handleAddTransaction} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Fecha</label>
@@ -194,6 +207,15 @@ export default function BankModule() {
                                         <option value="expense">Egreso (-)</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 uppercase mb-1">RUT (Opcional)</label>
+                                <RutInput
+                                    onDataFound={handleRutDataFound}
+                                    onChange={() => { }}
+                                    placeholder="Ej: 76.353.490-6 (Solo Demo)"
+                                />
                             </div>
 
                             <div>
