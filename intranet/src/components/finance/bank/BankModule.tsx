@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Plus, Building2, ArrowUpRight, ArrowDownRight, Search, FileText } from 'lucide-react'
-import { BankAccount, Transaction } from '../../../types/finance'
+import type { BankAccount, Transaction } from '../../../types/finance'
 
 // Mock Data (Temporary)
 const INITIAL_ACCOUNTS: BankAccount[] = [
@@ -101,8 +101,8 @@ export default function BankModule() {
                             key={acc.id}
                             onClick={() => setSelectedAccount(acc.id)}
                             className={`p-4 rounded-2xl cursor-pointer transition-all border ${selectedAccount === acc.id
-                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 border-indigo-600'
-                                    : 'bg-white text-slate-600 hover:bg-slate-50 border-transparent hover:border-slate-200'
+                                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 border-indigo-600'
+                                : 'bg-white text-slate-600 hover:bg-slate-50 border-transparent hover:border-slate-200'
                                 }`}
                         >
                             <div className="flex justify-between items-start mb-2">
