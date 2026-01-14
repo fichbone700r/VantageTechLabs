@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
 import BankModule from './bank/BankModule'
-import { Wallet, CreditCard, PieChart } from 'lucide-react'
+import PurchaseInvoicesModule from './invoices/PurchaseInvoicesModule'
+import { Wallet, CreditCard, PieChart, FileText } from 'lucide-react'
 
 export default function FinanceLayout() {
     const location = useLocation()
@@ -22,18 +23,28 @@ export default function FinanceLayout() {
                 <Link
                     to="/finanzas/banco"
                     className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${isActive('/banco')
-                            ? 'border-indigo-600 text-indigo-600'
-                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                        ? 'border-indigo-600 text-indigo-600'
+                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                         }`}
                 >
                     <Wallet className="w-4 h-4" />
                     Banco
                 </Link>
                 <Link
+                    to="/finanzas/facturas"
+                    className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${isActive('/facturas')
+                        ? 'border-indigo-600 text-indigo-600'
+                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                        }`}
+                >
+                    <FileText className="w-4 h-4" />
+                    Facturas Compra
+                </Link>
+                <Link
                     to="/finanzas/flujo"
                     className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${isActive('/flujo')
-                            ? 'border-indigo-600 text-indigo-600'
-                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                        ? 'border-indigo-600 text-indigo-600'
+                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                         }`}
                 >
                     <PieChart className="w-4 h-4" />
@@ -42,8 +53,8 @@ export default function FinanceLayout() {
                 <Link
                     to="/finanzas/tarjetas"
                     className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${isActive('/tarjetas')
-                            ? 'border-indigo-600 text-indigo-600'
-                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                        ? 'border-indigo-600 text-indigo-600'
+                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
                         }`}
                 >
                     <CreditCard className="w-4 h-4" />
@@ -55,6 +66,7 @@ export default function FinanceLayout() {
             <Routes>
                 <Route path="/" element={<Navigate to="banco" replace />} />
                 <Route path="banco" element={<BankModule />} />
+                <Route path="facturas" element={<PurchaseInvoicesModule />} />
                 <Route path="flujo" element={<div className="p-10 text-center text-slate-500">Módulo en construcción: Flujo de Caja</div>} />
                 <Route path="tarjetas" element={<div className="p-10 text-center text-slate-500">Módulo en construcción: Tarjetas</div>} />
             </Routes>

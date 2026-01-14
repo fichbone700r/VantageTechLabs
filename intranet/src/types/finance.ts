@@ -17,3 +17,17 @@ export interface Transaction {
     accountId: string;
     balanceAfter: number; // Balance after this transaction
 }
+
+export interface PurchaseInvoice {
+    id: string;
+    providerName: string;
+    providerRUT: string;
+    documentNumber: string;
+    issueDate: string;
+    dueDate: string;
+    netAmount: number;
+    taxAmount: number;
+    totalAmount: number;
+    status: 'pending' | 'paid' | 'overdue';
+    description: string;
+}
