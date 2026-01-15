@@ -3,6 +3,8 @@ import Sidebar from './components/layout/Sidebar'
 import TopBar from './components/layout/TopBar'
 import Overview from './components/dashboard/Overview'
 import FinanceLayout from './components/finance/FinanceLayout'
+import RRHHLayout from './components/rrhh/RRHHLayout'
+
 
 import { FinanceProvider } from './context/FinanceContext'
 
@@ -24,6 +26,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Overview />} />
                 <Route path="/finanzas/*" element={<FinanceLayout />} />
+                <Route path="/rrhh/*" element={<RRHHLayout />} />
+
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>

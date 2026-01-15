@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
 import BankModule from './bank/BankModule'
 import PurchaseInvoicesModule from './invoices/PurchaseInvoicesModule'
-import { Wallet, CreditCard, PieChart, FileText } from 'lucide-react'
+import { Wallet, PieChart, FileText } from 'lucide-react'
 
 export default function FinanceLayout() {
     const location = useLocation()
@@ -50,16 +50,7 @@ export default function FinanceLayout() {
                     <PieChart className="w-4 h-4" />
                     Flujo de Caja
                 </Link>
-                <Link
-                    to="/finanzas/tarjetas"
-                    className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-colors whitespace-nowrap ${isActive('/tarjetas')
-                        ? 'border-indigo-600 text-indigo-600'
-                        : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
-                        }`}
-                >
-                    <CreditCard className="w-4 h-4" />
-                    Tarjetas Corporativas
-                </Link>
+
             </div>
 
             {/* Module Content */}
@@ -68,7 +59,7 @@ export default function FinanceLayout() {
                 <Route path="banco" element={<BankModule />} />
                 <Route path="facturas" element={<PurchaseInvoicesModule />} />
                 <Route path="flujo" element={<div className="p-10 text-center text-slate-500">Módulo en construcción: Flujo de Caja</div>} />
-                <Route path="tarjetas" element={<div className="p-10 text-center text-slate-500">Módulo en construcción: Tarjetas</div>} />
+
             </Routes>
         </div>
     )
