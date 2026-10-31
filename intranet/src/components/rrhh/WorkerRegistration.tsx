@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import RutInput from '../common/RutInput'
 import { Save, Send, User } from 'lucide-react'
+import { supabase } from '../../lib/supabase'
 
 // Mock styles for consistent UI
 const inputClass = "w-full pl-4 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all placeholder:text-slate-400"
@@ -48,16 +49,41 @@ export default function WorkerRegistration() {
             return
         }
 
-        // Simulate API delay
-        setTimeout(() => {
-            setLoading(false)
-            if (action === 'save') {
-                setMessage({ type: 'success', text: 'Ficha de trabajador guardada exitosamente.' })
-            } else {
-                setMessage({ type: 'success', text: 'Ficha guardada y enviada a contabilidad (correo enviado a contador).' })
+        try {
+            const payload = {
+                nombres: formData.nombres,
+                apellidos: formData.apellidos,
+                rut: formData.rut,
+                email: formData.email || null,
+                telefono: formData.telefono || null,
+                direccion: formData.direccion || null,
+                cargo: formData.cargo || null,
+                departamento: formData.departamento || null,
+                tipo_contrato: formData.tipoContrato || null,
+                fecha_ingreso: formData.fechaIngreso || null,
+                sueldo_base: formData.sueldoBase ? parseFloat(formData.sueldoBase) : null,
+                afp: formData.afp || null,
+                salud: formData.salud || null
             }
-            // Reset form could go here if desired
-        }, 1500)
+
+            const { error } = await supabase.from('workers').insert([payload])
+
+            if (error) throw error
+
+            if (action === 'save') {
+                setMessage({ type: 'success', text: 'Ficha de trabajador guardada exitosamente en la base de datos.' })
+            } else {
+                setMessage({ type: 'success', text: 'Ficha guardada y notificada a contabilidad.' })
+            }
+
+            // Optional: reset form or redirect
+            // setFormData(...) 
+        } catch (err: any) {
+            console.error('Error saving worker:', err)
+            setMessage({ type: 'error', text: 'Error al guardar: ' + (err.message || 'Error desconocido') })
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
