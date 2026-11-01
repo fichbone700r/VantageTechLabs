@@ -28,10 +28,69 @@ Object.assign(translations.es, {
   visualThreeCopy: 'El mismo pensamiento de sistemas puede extenderse a logística, transporte, producción y otros flujos físicos.'
 });
 
-let language = localStorage.getItem('vantage-language') || 'en';
+Object.assign(translations.en, {
+  "heroEyebrow": "CUSTOM SOFTWARE · HARDWARE DEVELOPMENT · SYSTEMS INTEGRATION",
+  "heroCopy": "We develop custom software, connected hardware, and integrated systems to solve complex business challenges.",
+  "heroMarkets": "Focused on the United States and Europe, with a presence in South America.",
+  "heroCtaSecondary": "Explore our expertise ↓",
+  "expertiseOneCopy": "Web applications, business platforms, automation, and integrations that reduce disconnected work.",
+  "expertiseTwoTitle": "Hardware & IoT",
+  "expertiseTwoCopy": "Connected devices and sensor interfaces that make physical inputs available to software.",
+  "expertiseThreeTitle": "Systems integration",
+  "expertiseThreeCopy": "Connect devices, platforms, and operational processes so teams can work from consistent information.",
+  "conceptLabel": "Concept illustrations · Not actual products, premises, or personnel.",
+  "signalEyebrow": "Interactive demo · Simulated data",
+  "signalDisclaimer": "Interactive demo · Simulated data. No live operational data is shown.",
+  "signalAlert": "Alert: temperature at or above 30°C",
+  "signalActionNormal": "Continue monitoring the simulated reading.",
+  "signalActionAlert": "Possible action: notify an operator to investigate the reading. No external action is triggered.",
+  "temperatureAccessible": "Simulated temperature in degrees Celsius",
+  "homeAccessible": "Vantage Tech Labs home",
+  "navigationAccessible": "Primary navigation",
+  "modulesAccessible": "Digital Workplace modules",
+  "heroAlt": "Concept illustration of a V made of circuitry, metal, and glass",
+  "solutionsCopy": "Digital Workplace brings together an overview dashboard, finance workflows, and people management. Access is reserved for authorized users.",
+  "moduleOne": "Overview dashboard",
+  "aboutLocation": "Palo Alto, California, USA",
+  "formInvalid": "Check the required fields, email format, and maximum lengths.",
+  "formUnavailable": "Inquiry delivery is temporarily unavailable. Your text has been kept; please try again later.",
+  "formLimited": "Too many requests. Your text has been kept; please wait a minute before trying again."
+});
+Object.assign(translations.es, {
+  "heroEyebrow": "SOFTWARE A MEDIDA · DESARROLLO DE HARDWARE · INTEGRACIÓN DE SISTEMAS",
+  "heroCopy": "Desarrollamos software a medida, hardware conectado y sistemas integrados para resolver desafíos empresariales complejos.",
+  "heroMarkets": "Enfocados en Estados Unidos y Europa, con presencia en Sudamérica.",
+  "heroCtaSecondary": "Explorar especialidades ↓",
+  "expertiseOneCopy": "Aplicaciones web, plataformas empresariales, automatización e integraciones que reducen el trabajo desconectado.",
+  "expertiseTwoTitle": "Hardware e IoT",
+  "expertiseTwoCopy": "Dispositivos conectados e interfaces de sensores que hacen disponibles las señales físicas para el software.",
+  "expertiseThreeTitle": "Integración de sistemas",
+  "expertiseThreeCopy": "Conectamos dispositivos, plataformas y procesos operativos para trabajar con información consistente.",
+  "conceptLabel": "Ilustraciones conceptuales · No representan productos, instalaciones ni personal reales.",
+  "signalEyebrow": "Demostración interactiva · Datos simulados",
+  "signalDisclaimer": "Demostración interactiva · Datos simulados. No se muestran datos operativos en vivo.",
+  "signalAlert": "Alerta: temperatura igual o superior a 30°C",
+  "signalActionNormal": "Continuar observando la lectura simulada.",
+  "signalActionAlert": "Acción posible: avisar a un operador para investigar la lectura. No se activa ninguna acción externa.",
+  "temperatureAccessible": "Temperatura simulada en grados Celsius",
+  "homeAccessible": "Inicio de Vantage Tech Labs",
+  "navigationAccessible": "Navegación principal",
+  "modulesAccessible": "Módulos de Digital Workplace",
+  "heroAlt": "Ilustración conceptual de una V de circuitos, metal y vidrio",
+  "solutionsCopy": "Digital Workplace reúne un panel general, flujos de finanzas y gestión de personas. El acceso está reservado a usuarios autorizados.",
+  "moduleOne": "Panel general",
+  "aboutLocation": "Palo Alto, California, USA",
+  "formInvalid": "Revise los campos obligatorios, el formato del correo y las longitudes máximas.",
+  "formUnavailable": "El envío está temporalmente fuera de servicio. Conservamos su texto; vuelva a intentarlo más tarde.",
+  "formLimited": "Demasiadas solicitudes. Conservamos su texto; espere un minuto antes de reintentar."
+});
+let language = 'en';
+try { if (localStorage.getItem('vantage-language') === 'es') language = 'es'; } catch {}
+let sending = false;
+let formState = '';
 const applyLanguage = (nextLanguage) => {
   language = nextLanguage;
-  localStorage.setItem('vantage-language', language);
+  try { localStorage.setItem('vantage-language', language); } catch {}
   const copy = translations[language];
   document.documentElement.lang = language;
   document.title = copy.pageTitle;
@@ -41,6 +100,10 @@ const applyLanguage = (nextLanguage) => {
   document.querySelectorAll('[data-i18n-aria]').forEach((element) => { element.setAttribute('aria-label', copy[element.dataset.i18nAria]); });
   document.querySelectorAll('[data-i18n-alt]').forEach((element) => { element.alt = copy[element.dataset.i18nAlt]; });
   document.querySelectorAll('[data-language-toggle]').forEach((button) => { button.textContent = language === 'en' ? 'ES' : 'EN'; button.setAttribute('aria-label', language === 'en' ? 'Cambiar a español' : 'Change to English'); });
+  document.querySelector('meta[property="og:title"]').content = copy.pageTitle;
+  document.querySelector('meta[property="og:description"]').content = copy.pageDescription;
+  if (formState) formStatus.textContent = copy[formState];
+  if (sending) form.querySelector('button[type="submit"]').textContent = copy.sending;
   updateSignal();
 };
 
@@ -55,8 +118,11 @@ const updateSignal = () => {
   status.textContent = translations[language][isAlert ? 'signalAlert' : 'signalNormal'];
   status.classList.toggle('alert', isAlert);
   status.classList.toggle('normal', !isAlert);
-  const finalY = Math.max(18, Math.min(124, 126 - ((value - 12) / 26) * 111));
-  signalLine.setAttribute('points', `0,102 52,96 104,100 156,83 208,92 260,66 312,74 364,48 420,${finalY.toFixed(0)}`);
+  document.querySelector('#signal-action').textContent = translations[language][isAlert ? 'signalActionAlert' : 'signalActionNormal'];
+  const y = (reading) => 150 - ((reading - 12) / 26) * 150;
+  const readings = [20, 21, 20.5, 22, 21.5, 23, 22.5, 21, value];
+  signalLine.setAttribute('points', readings.map((reading, index) => (index * 52.5) + ',' + y(reading).toFixed(2)).join(' '));
+  temperature.setAttribute('aria-valuetext', value.toFixed(1) + (language === 'es' ? ' grados Celsius' : ' degrees Celsius'));
 };
 
 document.querySelectorAll('[data-language-toggle]').forEach((button) => button.addEventListener('click', () => applyLanguage(language === 'en' ? 'es' : 'en')));
@@ -69,33 +135,49 @@ menuButton.addEventListener('click', () => {
   const open = navigation.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
 });
+navigation.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') { navigation.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.focus(); }
+});
 navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); }));
 
 const form = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (sending) return;
   const formData = Object.fromEntries(new FormData(form));
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    formStatus.textContent = translations[language].formInvalid;
+  if (!form.checkValidity() || !formData.name.trim() || !formData.description.trim()) {
+    formState = 'formInvalid';
+    formStatus.textContent = translations[language][formState];
+    form.querySelector(':invalid')?.focus();
     formStatus.className = 'form-error';
     return;
   }
   const submitButton = form.querySelector('button[type="submit"]');
+  sending = true;
+  formState = '';
+  form.setAttribute('aria-busy', 'true');
   submitButton.disabled = true;
   submitButton.textContent = translations[language].sending;
   formStatus.textContent = '';
   try {
     const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
-    if (!response.ok) throw new Error('contact request failed');
+    const result = await response.json();
+    if (!response.ok || result.ok !== true) {
+      formState = response.status === 503 ? 'formUnavailable' : response.status === 429 ? 'formLimited' : 'formError';
+      throw new Error('contact request failed');
+    }
     form.reset();
-    formStatus.textContent = translations[language].formSuccess;
+    formState = 'formSuccess';
+    formStatus.textContent = translations[language][formState];
     formStatus.className = 'form-success';
   } catch {
-    formStatus.textContent = translations[language].formError;
+    formState ||= 'formError';
+    formStatus.textContent = translations[language][formState];
     formStatus.className = 'form-error';
   } finally {
+    sending = false;
+    form.setAttribute('aria-busy', 'false');
     submitButton.disabled = false;
     submitButton.textContent = translations[language].send;
   }

@@ -9,6 +9,10 @@ function clientAddress(request) {
 
 function isAllowed(address) {
   const now = Date.now();
+  for (const [key, times] of requests) {
+    if (!times.some((time) => now - time < WINDOW_MS)) requests.delete(key);
+  }
+  if (!requests.has(address) && requests.size >= 10000) return false;
   const known = (requests.get(address) || []).filter((time) => now - time < WINDOW_MS);
   if (known.length >= MAX_REQUESTS) return false;
   known.push(now);
@@ -17,10 +21,11 @@ function isAllowed(address) {
 }
 
 function clean(value, limit) {
-  return typeof value === 'string' ? value.trim().slice(0, limit) : '';
+  return typeof value === 'string' && value.length <= limit ? value.trim() : '';
 }
 
 export default async function handler(request, response) {
+  response.setHeader('Cache-Control', 'no-store');
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
     return response.status(405).json({ error: 'Method not allowed' });
@@ -31,7 +36,15 @@ export default async function handler(request, response) {
   if (origin && !allowedOrigins.includes(origin)) return response.status(403).json({ error: 'Forbidden' });
   if (!isAllowed(clientAddress(request))) return response.status(429).json({ error: 'Too many requests' });
 
-  const body = request.body || {};
+  if (!request.headers['content-type']?.includes('application/json')) {
+    return response.status(415).json({ error: 'Unsupported content type' });
+  }
+  const body = request.body;
+  if (!body || typeof body !== 'object' || Array.isArray(body)) return response.status(400).json({ error: 'Invalid submission' });
+  const limits = { name: 100, email: 160, company: 160, country: 100, projectType: 40, description: 3000, website: 200 };
+  if (Object.entries(limits).some(([key, limit]) => body[key] !== undefined && (typeof body[key] !== 'string' || body[key].length > limit))) {
+    return response.status(400).json({ error: 'Invalid submission' });
+  }
   const name = clean(body.name, 100);
   const email = clean(body.email, 160);
   const company = clean(body.company, 160);
@@ -41,8 +54,8 @@ export default async function handler(request, response) {
   const honeypot = clean(body.website, 200);
   const allowedTypes = ['software', 'hardware', 'integrated', 'unsure'];
 
-  if (honeypot) return response.status(200).json({ ok: true });
-  if (!name || !/^\S+@\S+\.\S+$/.test(email) || !description || !allowedTypes.includes(projectType)) {
+  if (honeypot) return response.status(400).json({ error: 'Invalid submission' });
+  if (!name || !/^\S+@\S+\.\S+$/.test(email) || /[\r\n]/.test(name + email) || !description || !allowedTypes.includes(projectType)) {
     return response.status(400).json({ error: 'Invalid submission' });
   }
   if (!process.env.RESEND_API_KEY || !process.env.CONTACT_TO_EMAIL || !process.env.CONTACT_FROM_EMAIL) {
