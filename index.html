@@ -1,12 +1,218 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vantage Tech Labs — Operations connected</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261031.3"></head><body>
-<style>header{height:104px;background:#fff!important;border-bottom:1px solid #d9e2eb;gap:30px}.brand-logo{height:65px!important}.brand-logo img{width:203px;height:65px;object-fit:cover;object-position:center;mix-blend-mode:normal!important;filter:none!important}header nav a{color:#123b72!important;font-weight:700}header nav a:hover{color:#008fe9!important}.actions button:not(.button){color:#1648f5!important}.actions .button{background:#1648f5;border-color:#1648f5;color:#fff}.menu{color:#1648f5}.hero{background:linear-gradient(90deg,#06101cf5 0%,#06101ce6 38%,#06101c55 74%,#06101cb8),url('public/images/vantage-hero.jpg') center/cover!important}.bento article{isolation:isolate}.bento article:before{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.22;z-index:-1}.bento article:nth-child(1):before{background-image:url('public/images/vantage-bakery.jpg')}.bento article:nth-child(2):before{background-image:url('public/images/axle-fleet.jpg')}.bento article:nth-child(3):before{background-image:url('public/images/vantage-kitchen.jpg')}.fleet{background:linear-gradient(90deg,#091827f5,#091827ad),url('public/images/axle-fleet.jpg') center/cover}.map{background:linear-gradient(90deg,#06101ca8,#06101c44),url('public/images/axle-dispatch.jpg') center/cover!important}.device{background:linear-gradient(#06101c75,#06101c75),url('public/images/vantage-hardware.jpg') center/cover!important}.device:before{display:none}#kds .orders{padding:13px;background:linear-gradient(90deg,#06101ce8,#06101c80),url('public/images/vantage-kitchen.jpg') center/cover}.orders article{background:#091827e8}@media(max-width:850px){header{height:86px}.brand-logo{height:53px!important}.brand-logo img{width:165px;height:53px}header nav{top:85px;background:#fff}}</style><header><a class="brand brand-logo" href="#inicio"><img src="logo-new.png" alt="Vantage Tech Labs"></a><button class="menu">☰</button><nav><a href="#soluciones">Soluciones</a><a href="#axle">Transporte Axle Drive</a><a href="#live">Simulador en Vivo</a><a href="#hardware">Hardware & IoT</a><a href="#roi">Calculadora ROI</a></nav><div class="actions"><button id="lang">EN</button><button id="theme">◐</button><button class="button open-demo">Agendar demostración</button></div></header>
-<main><section class="hero" id="inicio"><span class="eyebrow">— ECOSISTEMA DE SOFTWARE OPERATIVO, HARDWARE IOT Y CARGAS TERRESTRES</span><h1>Plataforma Operativa, IoT y Transporte de Cargas para la Industria y Retail.</h1><p>Conectamos cada decisión desde el silo hasta el punto de venta: producción, flota, cadena de frío y operación comercial en un solo sistema.</p><div class="buttons"><a class="button" href="#live">Explorar simulador en vivo ↗</a><a class="button ghost" href="#axle">Ver ecosistema Axle Drive</a></div><div class="metrics"><div><b>350+</b><span>Nodos en operación</span></div><div><b>&lt;18ms</b><span>Latencia sync</span></div><div><b>−34%</b><span>Merma controlada</span></div><div><b>99.98%</b><span>Tolerancia offline</span></div></div><div class="route"><span>VANTAGE PRODUCCIÓN</span> → <span>AXLE DRIVE</span> → <span>VANTAGE POS & KDS</span></div></section>
-<section id="soluciones"><div class="intro"><div><em>01 / VERTICALES</em><h2>Una operación, sin puntos ciegos.</h2></div><p>Diseñamos software para las cosas que no se pueden pausar: masa en fermentación, una cámara fría, una ruta en tránsito o una fila en caja.</p></div><div class="bento"><article class="wide"><em>01</em><h3>Panaderías industriales</h3><p>Dosificación asistida, fermentación trazable y control de silos por lote.</p><div class="chart">▁▃▅▂▆ <small>Rendimiento de masa · 98.6%</small></div></article><article><em>02</em><h3>Transporte de cargas & flotas</h3><p>Rastreo satelital, telemetría de remolques y e-POD verificable.</p><a href="#axle">Abrir consola →</a></article><article><em>03</em><h3>Cadenas gastronómicas</h3><p>KDS multizona, comandas móviles y delivery sin fricción.</p></article><article class="wide"><em>04</em><h3>Retail y cajas rápidas</h3><p>POS de alto flujo, báscula integrada y stock que conversa con producción.</p><div class="scan">SKU 081904 · 0.842 kg<br><b>OK</b></div></article></div></section>
-<section id="axle"><div class="intro"><div><em>02 / AXLE DRIVE</em><h2>Carga crítica.<br>Visibilidad absoluta.</h2></div><p><a href="https://axle-drive.com" target="_blank">Axle Drive ↗</a> es la compañía de transporte de Vantage Tech Labs. La carretera se vuelve una extensión medible de la planta.</p></div><div class="fleet"><aside><small>UNIDADES ACTIVAS · 02</small><button class="truck active" data-truck="reefer"><b>T-104</b><span>REEFER · −18.6°C<br>18 pallets · Santiago → Valparaíso</span></button><button class="truck" data-truck="tolva"><b>T-218</b><span>TOLVA · 26 toneladas<br>Harina · Los Ángeles → Santiago</span></button><p>GPS sincronizado<br><strong>última señal: hace 4 s</strong></p></aside><div class="console"><div class="console-head"><span>● EN RUTA <small id="route-name">Santiago → Valparaíso</small></span><button id="bol">Carta de Porte ↗</button></div><div class="map"><div class="trail"></div><b class="start">SCL</b><b class="end">VAP</b><strong>▰</strong><small>−33.2279, −71.4056<br>COBERTURA LTE / SATELITAL</small></div><div class="telemetry"><div><small id="type">CÁMARA REEFER</small><b id="temp">−18.6°C</b><span id="state">Dentro de rango · certificado</span></div><div><small>CARGA</small><b id="cargo">18 pallets</b><span id="cargo-detail">Masa congelada</span></div><div><small>ARRIBO EST.</small><b id="eta">14:36</b><span>+02 min · tráfico moderado</span></div></div><div class="console-actions"><button class="button ghost" id="verify">Verificar temperatura reefer</button><button class="button" id="pod">Simular firma digital e-POD</button></div><p id="fleet-message"></p></div></div></section>
-<section id="live"><div class="intro"><div><em>03 / OPERACIÓN EN VIVO</em><h2>El pulso de la operación.</h2></div><p>Simuladores con datos operativos reales. Cada alerta se puede convertir en una acción antes de que se convierta en un costo.</p></div><div class="terminal"><div class="tabs"><button class="active" data-panel="kds">KDS de cocina</button><button data-panel="iot">Telemetría IoT</button><button data-panel="cost">Escandallo & costeo</button></div><div class="panel" id="kds"><div class="terminal-top"><span>● COCINA CENTRAL · TURNO MAÑANA</span><div id="filters"><button class="active">Todas</button><button>Cocina</button><button>Horno</button><button>Barra</button></div><button class="button small" id="new-order">+ Simular pedido</button></div><div class="orders"><article data-station="Cocina"><header><b>#A-1842</b><time>03:24</time></header><p>2× Marraqueta · 1× Café americano</p><small>COCINA · MESA 12</small><button>Preparar</button></article><article data-station="Horno"><header><b>#A-1841</b><time>06:51</time></header><p>1× Pizza pepperoni · 1× bebida</p><small>HORNO · PICKUP</small><button>Listo</button></article><article data-station="Barra"><header><b>#A-1840</b><time>09:02</time></header><p>3× Capuccino · 2× medialuna</p><small>BARRA · MESA 04</small><button>Entregar</button></article></div></div><div class="panel hidden" id="iot"><div class="iot"><article><small>● SONDA / FERMENTACIÓN 02</small><b id="sensor">28.0°C</b><p id="sensor-state">Óptimo · umbral crítico 32°C</p><input id="sensor-range" type="range" min="20" max="38" value="28"><small>20°C　　　　　　　　　　　　　　　　　38°C</small></article><article><small>CÁMARA FRÍO NORTE</small><b>3.2°C</b><p>Estable · compresor al 42%</p><div class="line">╱╱╱╱╱╱╱</div></article><article><small>REGISTRO DE EVENTOS</small><p>09:44:18 · sync gateway edge-03</p><p>09:41:05 · lectura confirmada</p><p>09:33:44 · ciclo de frío completado</p><button class="button ghost" id="export">Exportar CSV</button></article></div></div><div class="panel hidden" id="cost"><div class="cost"><div><small>FÓRMULA / MARRAQUETA · BATCH 100 KG</small><label>Harina <b>$42.000</b><input class="cost-range" type="range" min="0" max="30" value="0"></label><label>Levadura <b>$8.600</b><input class="cost-range" type="range" min="0" max="30" value="0"></label><label>Energía <b>$6.400</b><input class="cost-range" type="range" min="0" max="30" value="0"></label></div><div class="margin"><small>MARGEN BRUTO PROYECTADO</small><b id="margin">61.4%</b><div><i></i></div><p id="batch">Costo por batch: $57.000 CLP</p></div></div></div></div></section>
-<section id="hardware"><div class="intro"><div><em>04 / HARDWARE & IOT</em><h2>Construido para el terreno.</h2></div><p>Hardware industrial diseñado para seguir operando cuando el vapor, la harina, el frío o la conexión no cooperan.</p></div><div class="hardware"><div class="product-tabs"><button class="active" data-product="gateway">Edge Gateway Pro</button><button data-product="kdsunit">Terminal KDS 15.6″</button><button data-product="sensors">Sondas LoRaWAN</button></div><div class="product"><div class="device">VANTAGE<br>EDGE<br><i>━━━━</i><i>━━━━</i><i>━━━━</i></div><div><em id="product-no">GATEWAY / 01</em><h3 id="product-name">Vantage Edge Gateway Pro</h3><p id="product-desc">Procesamiento local de operaciones críticas, incluso sin conectividad externa.</p><dl id="specs"><div><dt>CPU</dt><dd>Quad-core ARM</dd></div><div><dt>ALMACENAMIENTO</dt><dd>NVMe local</dd></div><div><dt>CAMPO</dt><dd>RS-485 Modbus</dd></div><div><dt>ARQUITECTURA</dt><dd>Offline-first</dd></div></dl></div></div></div></section>
-<section class="security"><em>05 / SEGURIDAD Y CONTINUIDAD</em><h2>Permisos claros. Datos disponibles.</h2><div><p>RBAC para cada responsable de una operación donde la trazabilidad no es opcional.</p><nav><button>Admin</button><button>Jefe de Planta</button><button>Despachador de Flota</button><button>Maestro Panadero</button><button>Auditor</button></nav></div><aside>OPERACIÓN LOCAL　—　SYNC CIFRADO　—　NUBE<br><small>Modo tolerante a cortes · Exportación Excel / PDF</small></aside></section>
-<section><div class="intro"><div><em>06 / RESULTADOS</em><h2>Impacto que se puede auditar.</h2></div></div><div class="cases"><article><small>PANADERÍA / SANTIAGO</small><h3>Red San Sebastián</h3><b>−34%</b><p>Merma operativa</p><span>$14.2M CLP / mes ahorrados</span></article><article><small>GASTRONOMÍA / 14 LOCALES</small><h3>District Craft Group</h3><b>6.4 min</b><p>Ticket prep time</p><span>Coordinación KDS multizona</span></article><article><small>INDUSTRIA / AUSTRAL</small><h3>Cervecería Australis</h3><b>99.4%</b><p>Exactitud en barriles</p><span>Telemetría y trazabilidad</span></article></div></section>
-<section class="roi" id="roi"><div><em>07 / CALCULADORA ROI</em><h2>Cuantifique la siguiente mejora.</h2><p>Una estimación inicial para dimensionar el impacto operacional de su despliegue.</p><label>Industria<select><option>Panadería / Elaboración</option><option>Transporte de Cargas & Flotas</option><option>Restaurante / Cadena</option></select></label><label>Moneda de cálculo<select id="currency"><option value="USD">USD — Dólar estadounidense</option><option value="CLP">CLP — Peso chileno</option></select></label><label>Sucursales o camiones <b id="units-out">8</b><input id="units" type="range" min="1" max="30" value="8"></label><label>Facturación mensual <b id="rev-out">US$38M</b><input id="revenue" type="range" min="5" max="150" value="38"></label><label>Merma / error actual <b id="waste-out">8%</b><input id="waste" type="range" min="2" max="15" value="8"></label></div><aside><small>AHORRO PROYECTADO / MES</small><b id="saving">US$1.03M</b><p id="currency-note">USD · estimación conservadora</p><hr><p>Producto salvado <strong id="saved">1,216 kg</strong></p><p>Horas recuperadas <strong id="hours">54 h</strong></p><p>Payback estimado <strong id="payback">4.2 meses</strong></p><button class="button ghost open-demo">Solicitar plan a medida →</button></aside></section></main>
-<footer><a class="brand brand-logo" href="#inicio"><img src="logo-new.png" alt="Vantage Tech Labs"></a><p>Del silo a la planta, de la carretera al punto de venta.</p><div><a href="https://axle-drive.com">axle-drive.com</a>　<a href="mailto:sebastian@vantagetechlabs.com">sebastian@vantagetechlabs.com</a></div><small>Operación diseñada para trazabilidad sanitaria y continuidad operacional · © 2026</small></footer>
-<dialog id="demo"><button class="close">×</button><em>AGENDEMOS</em><h2>Ficha técnica preliminar.</h2><p>Cuéntenos dónde comienza su operación y le devolvemos una propuesta de despliegue.</p><form id="demo-form"><input required name="name" placeholder="Nombre y apellido"><input required type="email" name="email" placeholder="Email corporativo"><input name="company" placeholder="Empresa"><input name="phone" placeholder="Teléfono"><select name="sector"><option>Panadería / Elaboración</option><option>Transporte de Cargas</option><option>Restaurante / Cadena</option><option>Retail</option></select><input name="scope" placeholder="Sucursales o camiones"><button class="button">Generar ficha preliminar</button></form><div class="success hidden"><small>● FICHA GENERADA</small><h3 id="ref"></h3><p id="summary"></p><button class="button ghost" id="copy">Copiar resumen</button></div></dialog><dialog id="bol-modal"><button class="close">×</button><em>DOCUMENTO ELECTRÓNICO</em><h2>Carta de Porte / BOL</h2><div class="bol"><p>FOLIO <b>AD-2026-104-881</b></p><p>SELLO <b>ATL-773409</b></p><p>PESO BRUTO <b>14,580 kg</b></p><p>LICENCIA CONDUCTOR <b>CL · B-71624938</b></p></div></dialog><script src="script.js?v=20261031.3"></script><script>const erpanMenu=[...document.querySelectorAll('header nav a')].find(a=>a.textContent.includes('Axle')),axleMenu=document.createElement('a');axleMenu.href='#axle';erpanMenu.after(axleMenu);const setErpanMenu=()=>{const spanish=document.documentElement.lang==='es';erpanMenu.href='#soluciones';erpanMenu.textContent=spanish?'ERPan Panadería':'ERPan Bakery';axleMenu.textContent=spanish?'Transporte Axle Drive':'Axle Drive Freight'};setErpanMenu();document.querySelector('#lang').addEventListener('click',()=>setTimeout(setErpanMenu));</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Vantage Tech Labs builds integrated software and hardware systems for complex business operations." />
+    <meta name="theme-color" content="#071018" />
+    <link rel="canonical" href="https://www.vantagetechlabs.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.vantagetechlabs.com/" />
+    <meta property="og:title" content="Vantage Tech Labs | Where software meets the physical world" />
+    <meta property="og:description" content="Integrated software and hardware systems for real-world operations." />
+    <meta property="og:image" content="https://www.vantagetechlabs.com/public/images/vantage-v-concept.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Vantage Tech Labs | Where software meets the physical world</title>
+    <link rel="preload" as="image" href="public/images/vantage-v-concept.png" />
+    <link rel="stylesheet" href="styles.css?v=20261101.1" />
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Organization","name":"Vantage Tech Labs","url":"https://www.vantagetechlabs.com/","address":{"@type":"PostalAddress","addressLocality":"Palo Alto","addressRegion":"California","addressCountry":"US"}}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="Vantage Tech Labs home">
+        <img src="logo-new.png" alt="Vantage Tech Labs" width="330" height="112" />
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-i18n-aria="menuLabel" data-i18n="menu">Menu</button>
+      <nav id="primary-navigation" aria-label="Primary navigation">
+        <a href="#expertise" data-i18n="navExpertise">Expertise</a>
+        <a href="#solutions" data-i18n="navSolutions">Solutions</a>
+        <a href="#industries" data-i18n="navIndustries">Industries</a>
+        <a href="#how-we-work" data-i18n="navProcess">How We Work</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+        <a class="app-link" href="https://app.vantagetechlabs.com/login" target="_blank" rel="noopener" data-i18n="navApp">Client access ↗</a>
+        <button class="language-switch" type="button" data-language-toggle aria-label="Change language">ES</button>
+        <a class="nav-cta" href="#contact" data-i18n="navCta">Discuss your project</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-art" src="public/images/vantage-v-concept.png" alt="Conceptual V form made of metal, glass and circuitry" fetchpriority="high" />
+        <div class="hero-shade"></div>
+        <div class="wrap hero-content">
+          <p class="eyebrow" data-i18n="heroEyebrow">Vantage Tech Labs</p>
+          <h1 id="hero-title" data-i18n="heroTitle">Software intelligence.<br />Hardware precision.</h1>
+          <p class="hero-copy" data-i18n="heroCopy">We design integrated systems for businesses that operate in the physical world — connecting workflows, devices, and decisions with clarity.</p>
+          <p class="market-line" data-i18n="heroMarkets">United States · Europe · South America</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact" data-i18n="heroCtaPrimary">Discuss your project</a>
+            <a class="button button-quiet" href="#solutions" data-i18n="heroCtaSecondary">Explore our solutions <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro section" aria-labelledby="intro-title">
+        <div class="wrap split-intro">
+          <p class="eyebrow" data-i18n="introEyebrow">Where software meets the physical world</p>
+          <div>
+            <h2 id="intro-title" data-i18n="introTitle">Technology that respects the realities of operations.</h2>
+            <p data-i18n="introCopy">From an individual device to a connected operation, we bring together software, hardware, and practical implementation for organizations navigating real-world complexity.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section expertise" id="expertise" aria-labelledby="expertise-title">
+        <div class="wrap">
+          <p class="eyebrow" data-i18n="expertiseEyebrow">Expertise</p>
+          <h2 id="expertise-title" data-i18n="expertiseTitle">One operating picture, built across disciplines.</h2>
+          <div class="expertise-grid">
+            <article class="expertise-card">
+              <span class="card-index">01</span>
+              <h3 data-i18n="expertiseOneTitle">Custom software</h3>
+              <p data-i18n="expertiseOneCopy">Purposeful applications, interfaces, and operational tools shaped around how people actually work.</p>
+            </article>
+            <article class="expertise-card">
+              <span class="card-index">02</span>
+              <h3 data-i18n="expertiseTwoTitle">Hardware &amp; devices</h3>
+              <p data-i18n="expertiseTwoCopy">Connected devices and practical interfaces designed for real environments, not just screens.</p>
+            </article>
+            <article class="expertise-card">
+              <span class="card-index">03</span>
+              <h3 data-i18n="expertiseThreeTitle">Integrated systems</h3>
+              <p data-i18n="expertiseThreeCopy">A considered connection between signals, workflows, teams, and the decisions that follow.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="image-stories" aria-labelledby="visual-context-title">
+        <div class="wrap">
+          <div class="visual-heading">
+            <p class="eyebrow" data-i18n="visualEyebrow">Visual contexts</p>
+            <h2 id="visual-context-title" data-i18n="visualTitle">From physical signals to operational clarity.</h2>
+            <p data-i18n="visualCopy">A considered visual language for the places where software, hardware, and operations meet.</p>
+          </div>
+          <article class="visual-story visual-story-signal">
+            <figure><img src="public/images/signal-system-concept.png" alt="Conceptual connection between a device, processing layers, and a digital interface" data-i18n-alt="imageSignalAlt" loading="lazy" /></figure>
+            <div class="story-copy"><span>01</span><h3 data-i18n="visualOneTitle">Signals become systems.</h3><p data-i18n="visualOneCopy">The value is not a device alone. It is the considered path from physical input to an informed decision.</p></div>
+          </article>
+          <article class="visual-story visual-story-build">
+            <div class="story-copy"><span>02</span><h3 data-i18n="visualTwoTitle">Built with software and hardware in view.</h3><p data-i18n="visualTwoCopy">Interfaces, devices, and the systems behind them are designed as one practical whole.</p></div>
+            <div class="build-media"><figure><img src="public/images/engineering-station.png" alt="Engineering workstation with software interface" data-i18n-alt="imageEngineeringAlt" loading="lazy" /></figure><figure><img src="public/images/electronics-lab.png" alt="Electronic board under precision testing" data-i18n-alt="imageLabAlt" loading="lazy" /></figure><figure><img src="public/images/vantage-hardware.jpg" alt="Industrial gateway and touch display" data-i18n-alt="imageHardwareAlt" loading="lazy" /></figure></div>
+          </article>
+          <article class="visual-story visual-story-field">
+            <div class="field-media"><figure class="field-primary"><img src="public/images/logistics-device.png" alt="Connected device at a logistics facility" data-i18n-alt="imageLogisticsDeviceAlt" loading="lazy" /></figure><div class="field-ribbon"><figure><img src="public/images/axle-fleet.jpg" alt="Logistics fleet at a distribution facility" data-i18n-alt="imageFleetAlt" loading="lazy" /></figure><figure><img src="public/images/axle-dispatch.jpg" alt="Dispatch workspace with operational screens" data-i18n-alt="imageDispatchAlt" loading="lazy" /></figure><figure><img src="public/images/vantage-bakery.jpg" alt="Food production facility" data-i18n-alt="imageProductionAlt" loading="lazy" /></figure></div></div>
+            <div class="story-copy"><span>03</span><h3 data-i18n="visualThreeTitle">Made for operational environments.</h3><p data-i18n="visualThreeCopy">The same systems thinking can extend across logistics, transport, production, and other physical workflows.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="signal-section" aria-labelledby="signal-title">
+        <div class="wrap signal-layout">
+          <div class="signal-copy">
+            <p class="eyebrow" data-i18n="signalEyebrow">Interactive concept · Simulated data</p>
+            <h2 id="signal-title" data-i18n="signalTitle">From signal to decision.</h2>
+            <p data-i18n="signalCopy">A signal becomes useful when its context is visible. Move the temperature input to explore a simple threshold-based operational view.</p>
+          </div>
+          <div class="signal-panel" data-signal-panel>
+            <div class="signal-topline">
+              <span data-i18n="signalLabel">Temperature input</span>
+              <output id="temperature-value" for="temperature">21.0°C</output>
+            </div>
+            <input id="temperature" type="range" min="12" max="38" value="21" step="0.5" aria-describedby="signal-status signal-disclaimer" />
+            <div class="range-labels"><span>12°C</span><span data-i18n="threshold">Alert threshold: 30°C</span><span>38°C</span></div>
+            <div class="signal-chart" aria-hidden="true">
+              <span class="threshold-line"></span>
+              <svg viewBox="0 0 420 150" preserveAspectRatio="none"><polyline id="signal-line" points="0,102 52,96 104,100 156,83 208,92 260,66 312,74 364,48 420,59" /></svg>
+            </div>
+            <p class="signal-status normal" id="signal-status" role="status" aria-live="polite" data-i18n="signalNormal">Normal operating range</p>
+            <div class="signal-controls"><button class="text-button" type="button" data-signal-reset data-i18n="reset">Reset simulation</button><small id="signal-disclaimer" data-i18n="signalDisclaimer">Interactive concept · Simulated data. No live operational data is shown.</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="industries" aria-labelledby="industries-title">
+        <div class="wrap">
+          <p class="eyebrow" data-i18n="industriesEyebrow">Possible applications</p>
+          <h2 id="industries-title" data-i18n="industriesTitle">Built for operations with a physical footprint.</h2>
+          <p class="section-lead" data-i18n="industriesCopy">These are examples of environments where integrated systems can make work more visible and coordinated.</p>
+          <div class="industry-list">
+            <article><span>01</span><h3 data-i18n="industryOne">Manufacturing &amp; Production</h3></article>
+            <article><span>02</span><h3 data-i18n="industryTwo">Logistics &amp; Transportation</h3></article>
+            <article><span>03</span><h3 data-i18n="industryThree">Retail &amp; Commerce</h3></article>
+            <article><span>04</span><h3 data-i18n="industryFour">Food Production &amp; Hospitality</h3></article>
+            <article><span>05</span><h3 data-i18n="industryFive">Business Operations</h3></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="solutions-section" id="solutions" aria-labelledby="solutions-title">
+        <div class="wrap solution-layout">
+          <div>
+            <p class="eyebrow" data-i18n="solutionsEyebrow">Solutions</p>
+            <h2 id="solutions-title" data-i18n="solutionsTitle">Digital Workplace</h2>
+            <p class="solution-copy" data-i18n="solutionsCopy">A portfolio of practical operational modules for teams that need a connected workspace.</p>
+            <a class="button button-quiet" href="https://app.vantagetechlabs.com/login" target="_blank" rel="noopener" data-i18n="solutionsCta">Explore client access ↗</a>
+          </div>
+          <div class="module-grid" aria-label="Digital Workplace modules">
+            <span data-i18n="moduleOne">Operations</span><span data-i18n="moduleTwo">Inventory</span><span data-i18n="moduleThree">Finance</span><span data-i18n="moduleFour">Production</span><span data-i18n="moduleFive">People</span><span data-i18n="moduleSix">Maintenance</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process" id="how-we-work" aria-labelledby="process-title">
+        <div class="wrap">
+          <p class="eyebrow" data-i18n="processEyebrow">How we work</p>
+          <h2 id="process-title" data-i18n="processTitle">A disciplined path from context to capability.</h2>
+          <ol class="process-list">
+            <li><span>01</span><div><h3 data-i18n="processOneTitle">Discover</h3><p data-i18n="processOneCopy">Understand the operational context, people, constraints, and opportunity.</p></div></li>
+            <li><span>02</span><div><h3 data-i18n="processTwoTitle">Design</h3><p data-i18n="processTwoCopy">Shape the system, interfaces, and interactions around the work itself.</p></div></li>
+            <li><span>03</span><div><h3 data-i18n="processThreeTitle">Build</h3><p data-i18n="processThreeCopy">Develop the software, hardware, and connections required by the solution.</p></div></li>
+            <li><span>04</span><div><h3 data-i18n="processFourTitle">Validate</h3><p data-i18n="processFourCopy">Review behavior against real workflows and refine what matters.</p></div></li>
+            <li><span>05</span><div><h3 data-i18n="processFiveTitle">Launch &amp; evolve</h3><p data-i18n="processFiveCopy">Introduce the system thoughtfully, then continue learning from its use.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <div class="wrap about-layout">
+          <p class="eyebrow" data-i18n="aboutEyebrow">About Vantage Tech Labs</p>
+          <div><h2 id="about-title" data-i18n="aboutTitle">We design for the places where work becomes real.</h2><p data-i18n="aboutCopy">Vantage Tech Labs designs software and hardware systems for businesses across industries. Our work is guided by the practical reality of operations — where devices, people, processes, and information must work together.</p><p class="location" data-i18n="aboutLocation">Palo Alto, California · United States</p></div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="wrap contact-layout">
+          <div><p class="eyebrow" data-i18n="contactEyebrow">Start a conversation</p><h2 id="contact-title" data-i18n="contactTitle">Tell us what you're building.</h2><p data-i18n="contactCopy">Share a little context. We’ll use it to understand where software, hardware, or an integrated system may help.</p></div>
+          <form id="contact-form" novalidate>
+            <div class="form-grid">
+              <label><span data-i18n="fieldName">Name</span><input name="name" autocomplete="name" required /></label>
+              <label><span data-i18n="fieldEmail">Work email</span><input name="email" type="email" autocomplete="email" required /></label>
+              <label><span data-i18n="fieldCompany">Company <em>Optional</em></span><input name="company" autocomplete="organization" /></label>
+              <label><span data-i18n="fieldCountry">Country / market <em>Optional</em></span><input name="country" autocomplete="country-name" /></label>
+              <label class="full"><span data-i18n="fieldProjectType">Project type</span><select name="projectType" required><option value="" data-i18n="selectPlaceholder">Select one</option><option value="software" data-i18n="selectSoftware">Software</option><option value="hardware" data-i18n="selectHardware">Hardware / devices</option><option value="integrated" data-i18n="selectIntegrated">Integrated system</option><option value="unsure" data-i18n="selectUnsure">Not sure yet</option></select></label>
+              <label class="full"><span data-i18n="fieldDescription">Project description</span><textarea name="description" rows="5" required data-i18n-placeholder="descriptionPlaceholder" placeholder="What are you looking to improve, connect, or build?"></textarea></label>
+              <label class="honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <button class="button button-primary" type="submit" data-i18n="send">Send inquiry</button>
+            <p id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div><img src="logo-new.png" alt="Vantage Tech Labs" class="footer-logo" width="330" height="112" /><p data-i18n="footerCopy">Software intelligence and hardware precision for the physical world.</p></div>
+        <div><p class="footer-label" data-i18n="footerNavigate">Navigate</p><a href="#expertise" data-i18n="navExpertise">Expertise</a><a href="#solutions" data-i18n="navSolutions">Solutions</a><a href="#contact" data-i18n="navContact">Contact</a></div>
+        <div><p class="footer-label" data-i18n="footerLocation">Location</p><p data-i18n="aboutLocation">Palo Alto, California · United States</p><a href="/privacy.html" data-i18n="privacy">Privacy</a></div>
+      </div>
+      <div class="wrap footer-bottom"><span>© <span id="year"></span> Vantage Tech Labs</span><button class="language-switch footer-language" type="button" data-language-toggle aria-label="Change language">ES</button></div>
+    </footer>
+    <script src="script.js?v=20261101.1" defer></script>
+  </body>
+</html>
