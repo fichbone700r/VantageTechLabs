@@ -39,3 +39,31 @@ the client's IP before opening the form to sustained production traffic.
 This does not require DNS, email-record, or domain-association changes.
 
 No production deployment is performed by the local revision workflow.
+
+## Verification status and next controlled test
+
+This workspace has no public-site delivery credentials available and no
+connection to the public Vercel project's environment settings. The intranet's
+environment is unrelated and must not be reused. The configured production
+recipient and authorized sender could not be inspected or verified here.
+
+After configuring the existing server-only variables, submit exactly one
+controlled inquiry with description "Vantage Tech Labs controlled delivery
+test" and an owner-controlled Reply-To address. Provider API acceptance
+confirms submission only. A provider delivery event confirms delivery to the
+receiving mail server; inbox receipt requires a separate mailbox check.
+Do not claim these later stages from a successful API response.
+
+The local rate limiter is per function instance. A shared IP rate limit at
+the Vercel Firewall remains a deployment configuration step.
+
+## Digital Workplace screenshot
+
+No appropriate product screenshot was found among repository assets.
+Keep the existing solution section until a sanitized capture is available.
+Useful capture: the banking workspace showing account navigation and a few
+transaction rows, using a dedicated demo account with entirely fictitious
+names, account numbers, amounts, and documents. Remove profile identities,
+credentials, browser chrome, notifications, and customer information.
+Confirm the captured workflow exists, label demo data clearly, and export a
+readable WebP with a mobile-friendly crop. Do not capture production records.

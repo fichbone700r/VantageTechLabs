@@ -35,13 +35,13 @@ const translations = {
     "visualCopy": "Connect devices, software, and workflows to monitor conditions, coordinate teams, and respond with better information.",
     "imageSignalAlt": "Conceptual connection between a device, processing layers, and a digital interface",
     "imageSignalCaption": "From device signal to useful operating context.",
-    "imageHardwareAlt": "Industrial gateway and touch display",
+    "imageHardwareAlt": "Concept illustration of an industrial gateway and touch display",
     "imageHardwareCaption": "Practical hardware interfaces",
-    "imageEngineeringAlt": "Engineering workstation with software interface",
+    "imageEngineeringAlt": "Concept illustration of an engineering workstation with software interface",
     "imageEngineeringCaption": "Software design in context",
-    "imageLabAlt": "Electronic board under precision testing",
+    "imageLabAlt": "Concept illustration of an electronic board under precision testing",
     "imageLabCaption": "Hardware precision",
-    "imageLogisticsDeviceAlt": "Connected device at a logistics facility",
+    "imageLogisticsDeviceAlt": "Concept illustration of a connected device at a logistics facility",
     "imageLogisticsDeviceCaption": "Connected field environments",
     "imageFleetAlt": "Logistics fleet at a distribution facility",
     "imageFleetCaption": "Transportation environments",
@@ -122,7 +122,7 @@ const translations = {
     "visualTwoCopy": "Develop interfaces and device connections around the tasks people need to complete.",
     "visualThreeTitle": "Made for operational environments.",
     "visualThreeCopy": "The same systems thinking can extend across logistics, transport, production, and other physical workflows.",
-    "conceptLabel": "Concept illustrations · Not actual products, premises, or personnel.",
+    "conceptLabel": "Concept illustration",
     "signalActionNormal": "Continue monitoring the simulated reading.",
     "signalActionAlert": "Possible action: notify an operator to investigate the reading. No external action is triggered.",
     "temperatureAccessible": "Simulated temperature in degrees Celsius",
@@ -180,13 +180,13 @@ const translations = {
     "visualCopy": "Conecte dispositivos, software y procesos para observar condiciones, coordinar equipos y responder con mejor información.",
     "imageSignalAlt": "Conexión conceptual entre un dispositivo, capas de procesamiento y una interfaz digital",
     "imageSignalCaption": "De la señal del dispositivo a un contexto operativo útil.",
-    "imageHardwareAlt": "Gateway industrial y pantalla táctil",
+    "imageHardwareAlt": "Ilustración conceptual de un gateway industrial y una pantalla táctil",
     "imageHardwareCaption": "Interfaces de hardware prácticas",
-    "imageEngineeringAlt": "Estación de ingeniería con interfaz de software",
+    "imageEngineeringAlt": "Ilustración conceptual de una estación de ingeniería con interfaz de software",
     "imageEngineeringCaption": "Diseño de software en contexto",
-    "imageLabAlt": "Placa electrónica en pruebas de precisión",
+    "imageLabAlt": "Ilustración conceptual de una placa electrónica en pruebas de precisión",
     "imageLabCaption": "Precisión de hardware",
-    "imageLogisticsDeviceAlt": "Dispositivo conectado en una instalación logística",
+    "imageLogisticsDeviceAlt": "Ilustración conceptual de un dispositivo conectado en una instalación logística",
     "imageLogisticsDeviceCaption": "Entornos de operación conectados",
     "imageFleetAlt": "Flota logística en un centro de distribución",
     "imageFleetCaption": "Entornos de transporte",
@@ -267,7 +267,7 @@ const translations = {
     "visualTwoCopy": "Desarrolle interfaces y conexiones de dispositivos en torno a las tareas que las personas necesitan completar.",
     "visualThreeTitle": "Hecho para entornos operativos.",
     "visualThreeCopy": "El mismo pensamiento de sistemas puede extenderse a logística, transporte, producción y otros flujos físicos.",
-    "conceptLabel": "Ilustraciones conceptuales · No representan productos, instalaciones ni personal reales.",
+    "conceptLabel": "Ilustración conceptual",
     "signalActionNormal": "Continuar observando la lectura simulada.",
     "signalActionAlert": "Acción posible: avisar a un operador para investigar la lectura. No se activa ninguna acción externa.",
     "temperatureAccessible": "Temperatura simulada en grados Celsius",
@@ -391,12 +391,25 @@ form.addEventListener('submit', async (event) => {
   }
 });
 
-document.querySelector('[data-request-demo]').addEventListener('click', () => {
-  form.elements.projectType.value = 'digital-workplace';
-  document.querySelector('#demo-interest').hidden = false;
-});
-form.elements.projectType.addEventListener('change', () => {
+const updateInterest = () => {
   document.querySelector('#demo-interest').hidden = form.elements.projectType.value !== 'digital-workplace';
+};
+document.querySelectorAll('a[href="#contact"]').forEach((link) => {
+  link.addEventListener('click', () => {
+    form.elements.projectType.value = link.hasAttribute('data-request-demo') ? 'digital-workplace' : '';
+    updateInterest();
+    if (!sending) {
+      formState = '';
+      formStatus.textContent = '';
+      formStatus.className = '';
+    }
+  });
+});
+form.elements.projectType.addEventListener('change', updateInterest);
+// Browser history may restore controls. Start a returned general inquiry fresh.
+window.addEventListener('pageshow', () => {
+  if (form.elements.projectType.value === 'digital-workplace') form.elements.projectType.value = '';
+  updateInterest();
 });
 document.querySelector('#year').textContent = new Date().getFullYear();
 applyLanguage(language);
