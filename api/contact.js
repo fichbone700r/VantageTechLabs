@@ -52,7 +52,7 @@ export default async function handler(request, response) {
   const projectType = clean(body.projectType, 40);
   const description = clean(body.description, 3_000);
   const honeypot = clean(body.website, 200);
-  const allowedTypes = ['software', 'hardware', 'integrated', 'unsure'];
+  const allowedTypes = ['software', 'hardware', 'integrated', 'unsure', 'digital-workplace'];
 
   if (honeypot) return response.status(400).json({ error: 'Invalid submission' });
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || /[\r\n]/.test(name + email) || !description || !allowedTypes.includes(projectType)) {
